@@ -3,25 +3,28 @@ package trees;
 import lists.LinkedListBasedQueue;
 
 public class BinaryTree<E> {
-	Node<Integer> root;
-	
-	public Node<Integer> insert(Node<Integer> root, int key) {
-		if(root == null) {
-			root = new Node<Integer>(key);
+    Node<Integer> o_root;
+
+    public Node<Integer> insert(Node<Integer> root, int key) {
+        if (o_root == null) {
+            o_root = new Node<Integer>(key);
+        }
+        if (root == null) {
+            root = new Node<Integer>(key);
         } else {
             Node<Integer> cur;
-            if(key <= root.getKey()) {
-            	cur = insert(root.getLeft(), key);
+            if (key < root.getKey()) {
+                cur = insert(root.getLeft(), key);
                 root.setLeft(cur);
             } else {
-            	cur = insert(root.getRight(), key);
+                cur = insert(root.getRight(), key);
                 root.setRight(cur);
             }
         }
-		return root;
-	}
-	
-	/*public Node<String> insert(Node<String> root, String key) {
+        return root;
+    }
+
+    /*public Node<String> insert(Node<String> root, String key) {
 		if(root == null) {
             return new Node<String>(key);
         } else {
@@ -36,22 +39,21 @@ public class BinaryTree<E> {
             return root;
         }
 	}*/
-	
-	public int height(Node<E> root) {
-		if (root == null) { //root == null || (root.right == null && root.left == null)
-			return 0;
-		}
-		return 1+Math.max(height(root.getLeft()), height(root.getRight()));
-	}
-	
-	public int size(Node<E> root) { //Número de nodos en el árbol
-		if (root == null) {
-			return 0;
-		}
-		return 1+size(root.getLeft())+size(root.getRight());
-	}
-	
-	public void inOrderTraversal(Node<E> root) {
+    public int height(Node<E> root) {
+        if (root == null) { //root == null || (root.right == null && root.left == null)
+            return 0;
+        }
+        return 1 + Math.max(height(root.getLeft()), height(root.getRight()));
+    }
+
+    public int size(Node<E> root) { //Nï¿½mero de nodos en el ï¿½rbol
+        if (root == null) {
+            return 0;
+        }
+        return 1 + size(root.getLeft()) + size(root.getRight());
+    }
+
+    public void inOrderTraversal(Node<E> root) {
         if (root == null) {
             return;
         }
@@ -59,8 +61,8 @@ public class BinaryTree<E> {
         System.out.print(root.toString());
         inOrderTraversal(root.getRight());
     }
-	
-	public void preOrderTraversal(Node<E> root) {
+
+    public void preOrderTraversal(Node<E> root) {
         if (root == null) {
             return;
         }
@@ -68,8 +70,8 @@ public class BinaryTree<E> {
         preOrderTraversal(root.getLeft());
         preOrderTraversal(root.getRight());
     }
-	
-	public void postOrderTraversal(Node<E> root) {
+
+    public void postOrderTraversal(Node<E> root) {
         if (root == null) {
             return;
         }
@@ -77,26 +79,26 @@ public class BinaryTree<E> {
         postOrderTraversal(root.getRight());
         System.out.print(root.toString());
     }
-	
-	public void levelOrderTraversal(Node<E> root) {
-		if (root == null) {
+
+    public void levelOrderTraversal(Node<E> root) {
+        if (root == null) {
             return;
         }
-		LinkedListBasedQueue<Node<E>> queue = new LinkedListBasedQueue<> ();
-		queue.enqueue(root);
-		while(!queue.empty()) {
-			Node<E> node = queue.dequeue();
-			if(node.getLeft() != null) {
-				queue.enqueue(node.getLeft());
-			}
-			if(node.getRight() != null) {
-				queue.enqueue(node.getRight());
-			}
-			System.out.print(node.toString());
-		}
-	}
-	
-	/*class Node<E> {
+        LinkedListBasedQueue<Node<E>> queue = new LinkedListBasedQueue<>();
+        queue.enqueue(root);
+        while (!queue.empty()) {
+            Node<E> node = queue.dequeue();
+            if (node.getLeft() != null) {
+                queue.enqueue(node.getLeft());
+            }
+            if (node.getRight() != null) {
+                queue.enqueue(node.getRight());
+            }
+            System.out.print(node.toString());
+        }
+    }
+
+    /*class Node<E> {
 		private E key;
 		private Node<E> left;
 		private Node<E> right;
@@ -139,6 +141,4 @@ public class BinaryTree<E> {
 		}
 		return 1+Math.max(height(tree.left), height(tree.right));
 	}*/
-	
-	
 }

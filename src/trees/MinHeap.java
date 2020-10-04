@@ -2,8 +2,8 @@ package trees;
 
 import java.util.NoSuchElementException;
 
-public class MinHeap {
-	private int[] array; 
+public class MinHeap {	
+    private int[] array; 
     private int size; 
 
     public MinHeap() {

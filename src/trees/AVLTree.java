@@ -1,27 +1,27 @@
 package trees;
 
 public class AVLTree {
-	class Node {
-		int key; // holds the key
-		Node left; // pointer to left child
-		Node right; // pointer to right child
-		int height; // height of the node
+    class Node {
+        int key; // holds the key
+        Node left; // pointer to left child
+        Node right; // pointer to right child
+        int height; // height of the node
 
-		public Node(int key) {
-			this.key = key;
-			this.left = null;
-			this.right = null;
-			this.height = 0;
-		}
-	}
-	
-	//Insert a number in AVL tree height of leaf nodes is considered as 0. Returns the new root after balancing
-	public Node insert(Node root, int key) {
-        if(root == null) {
+        public Node(int key) {
+            this.key = key;
+            this.left = null;
+            this.right = null;
+            this.height = 0;
+        }
+    }
+
+    //Insert a number in AVL tree height of leaf nodes is considered as 0. Returns the new root after balancing
+    public Node insert(Node root, int key) {
+        if (root == null) {
             Node node = new Node(key);
             return node;
         }
-        if(key < root.key) {
+        if (key < root.key) {
             root.left = insert(root.left, key);
         } else {
             root.right = insert(root.right, key);
@@ -35,26 +35,26 @@ public class AVLTree {
         int balanceFactor = balanceFactor(node);
         if (balanceFactor < -1) {
             rebalanceLeft(node);
-            return rotateLeft(node); 
+            return rotateLeft(node);
         } else if (balanceFactor > 1) {
             rebalanceRight(node);
             return rotateRight(node);
         }
         return node;
-    }
+}
 
     public void rebalanceRight(Node node) {
-        if(balanceFactor(node.left) < 0) {
+        if (balanceFactor(node.left) < 0) {
             node.left = rotateLeft(node.left);
         }
     }
 
     public void rebalanceLeft(Node node) {
-        if(balanceFactor(node.right) > 0) {
+        if (balanceFactor(node.right) > 0) {
             node.right = rotateRight(node.right);
         }
     }
-    
+
     //Right rotate the tree corresponding to root node. Node x is at which right rotation is needed. Returns the new root of the tree
     public Node rotateRight(Node x) {
         Node y = x.left;
@@ -64,7 +64,7 @@ public class AVLTree {
         adjustHeight(y);
         return y;
     }
-    
+
     //Left rotate the tree corresponding to root node. Node x is at which left rotation is needed. Returns the new root of the tree
     public Node rotateLeft(Node x) {
         Node y = x.right;
@@ -77,40 +77,40 @@ public class AVLTree {
 
     public void adjustHeight(Node node) {
         int htLeft = -1, htRight = -1;
-        if(node.left != null) {
+        if (node.left != null) {
             htLeft = node.left.height;
         }
-        if(node.right != null) {
+        if (node.right != null) {
             htRight = node.right.height;
         }
-        node.height = 1+Math.max(htLeft, htRight);
+        node.height = 1 + Math.max(htLeft, htRight);
     }
 
     //Find balance factor of node
     public int balanceFactor(Node node) {
         int htLeft = -1, htRight = -1;
-        if(node.left != null) {
+        if (node.left != null) {
             htLeft = node.left.height;
         }
-        if(node.right != null) {
+        if (node.right != null) {
             htRight = node.right.height;
         }
         return (htLeft - htRight);
     }
-    
+
     //Find height of tree
-  	public int treeHeight(Node root) {
-  		int treeHeight = -1;
-  		if(root.left != null) {
-  			treeHeight = Math.max(treeHeight, root.left.height);
-  		}
-  		if(root.right != null) {
-  			treeHeight = Math.max(treeHeight, root.right.height);
-  		}
-  		return treeHeight;
-  	}
-	
-	/*public int height(Node<Integer> root) {
+    public int treeHeight(Node root) {
+        int treeHeight = -1;
+        if (root.left != null) {
+            treeHeight = Math.max(treeHeight, root.left.height);
+        }
+        if (root.right != null) {
+            treeHeight = Math.max(treeHeight, root.right.height);
+        }
+        return treeHeight;
+    }
+
+    /*public int height(Node<Integer> root) {
 		if (root == null) {
 			return -1;
 		} 
@@ -179,11 +179,9 @@ public class AVLTree {
 			parent.setRight(newNode);
 		}
 	}*/
-	
-	/*public void delete(Node<Integer> node) {
+ /*public void delete(Node<Integer> node) {
 		if (node.getRight() == null) {
 			
 		}
 	}*/
-	
 }
